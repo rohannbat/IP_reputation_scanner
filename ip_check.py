@@ -2,6 +2,7 @@ import requests
 import sys
 import os
 from dotenv import load_dotenv
+import time
 
 # Loading variables from .env file
 load_dotenv()
@@ -95,7 +96,6 @@ if __name__ == "__main__":
                 target_ip = line.strip()  # Remove invisible newline characters
                 if target_ip:  # Skip empty lines
                     check_ip(target_ip)
-                    # Optional: Add a small delay to avoid hitting API limits
                     # time.sleep(1)
 
         print("=" * 70)
