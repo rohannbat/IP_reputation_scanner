@@ -5,6 +5,8 @@ A Python tool to check IP address reputation using the AbuseIPDB API. This scrip
 ## Features
 
 - Check IP reputation against AbuseIPDB database
+- **Single IP mode**: Check individual IP addresses
+- **Bulk mode**: Check multiple IP addresses from a text file
 - View detailed information including ISP, country, and abuse confidence score
 - Check last 120 days of history
 - Simple command-line interface
@@ -43,17 +45,43 @@ A Python tool to check IP address reputation using the AbuseIPDB API. This scrip
 
 ## Usage
 
-Run the script from the command line with an IP address as an argument:
+The script supports two modes: **Single IP mode** and **Bulk mode**.
+
+### Single IP Mode
+
+Check a single IP address by passing it as an argument:
 
 ```bash
 python ip_check.py <IP_ADDRESS>
 ```
 
-### Example
-
+**Example:**
 ```bash
 python ip_check.py 192.168.1.1
 ```
+
+### Bulk Mode
+
+Check multiple IP addresses by providing a text file containing one IP address per line:
+
+```bash
+python ip_check.py <FILENAME.txt>
+```
+
+**Example:**
+```bash
+python ip_check.py ip_list.txt
+```
+
+**File Format:**
+Create a text file with one IP address per line:
+```
+192.168.1.1
+10.0.0.1
+172.16.0.1
+```
+
+Empty lines in the file will be automatically skipped.
 
 ### Output
 
@@ -65,8 +93,9 @@ The script will display:
 - Risk Score (0-100)
 - Security status (CLEAN or ALERT)
 
-Example output:
+**Single IP Mode Output:**
 ```
+[*] Single Mode: Checking 192.168.1.1...
 [*] Checking IP reputation for 192.168.1.1...
 
 ========================================
@@ -79,6 +108,27 @@ Risk Score: 0
 ----------------------------------------
 [+] CLEAN: No malicious activity reported.
 ========================================
+```
+
+**Bulk Mode Output:**
+```
+[*] Bulk Mode: Reading from ip_list.txt...
+======================================================================
+
+[*] Checking IP reputation for 192.168.1.1...
+========================================
+Report for: 192.168.1.1
+========================================
+...
+
+[*] Checking IP reputation for 10.0.0.1...
+========================================
+Report for: 10.0.0.1
+========================================
+...
+
+======================================================================
+[*] Scan Complete.
 ```
 
 ## Dependencies
